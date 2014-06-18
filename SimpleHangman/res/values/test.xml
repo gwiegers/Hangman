@@ -1,0 +1,19 @@
+<resources>
+  <string-array name="wordz">
+    <item>CHARGER</item>
+    <item>COMPUTER</item>
+    <item>TABLET</item>
+    <item>SYSTEM</item>
+    <item>APPLICATION</item>
+    <item>INTERNET</item>
+    <item>STYLUS</item>
+    <item>ANDROID</item>
+    <item>KEYBOARD</item>
+    <item>SMARTPHONE</item>
+	<item>BEAR</item>
+	<item>BOAR</item>
+	<item>DEER</item>
+	<item>DUCK</item>
+	<item>HARE</item>
+  </string-array>
+</resources>

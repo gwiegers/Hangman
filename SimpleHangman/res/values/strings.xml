@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SimplyHangman</string>
+    <string name="edit_message">Enter one letter</string>
+    <string name="action_settings">Settings</string>
+    <string name="button_send">Go</string>
+    <string name="title_activity_process_input">ProcessInput</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_you_lost">YouLost</string>
+    <string name="reset">Reset</string>
+    <string name="title_activity_settings">Settings</string>
+
+</resources>

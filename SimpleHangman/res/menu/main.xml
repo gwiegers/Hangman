@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.simplehangman.MainActivity" >
+
+    <item
+        android:id="@+id/reset"
+        android:orderInCategory="100"
+        android:title="@string/reset"/>
+    
+    <item
+        android:id="@+id/title_activity_settings"
+        android:orderInCategory="100"
+        android:title="@string/title_activity_settings" />
+
+</menu>
