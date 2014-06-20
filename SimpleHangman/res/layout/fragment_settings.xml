@@ -6,17 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.simplehangman.Settings$PlaceholderFragment" >   
-    
-    <SeekBar
-        android:id="@+id/seekBar1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
-        android:progress="1"
-        android:max="26"
-        android:layout_marginTop="95dp" />
+    tools:context="com.example.simplehangman.Settings$PlaceholderFragment" >
 
     <SeekBar
         android:id="@+id/seekBar2"
@@ -24,9 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/seekBar1"
-        android:progress="1"
-        android:max="100"
-        android:layout_marginTop="125dp" />
+        android:layout_marginTop="125dp"
+        android:max="25"
+        android:progress="5" />
 
     <TextView
         android:id="@+id/textViewProgress2"
@@ -35,25 +25,38 @@
         android:layout_alignBottom="@+id/seekBar2"
         android:layout_alignLeft="@+id/seekBar2"
         android:layout_marginBottom="36dp"
-        android:text="Lives:"
+        android:text="@string/progress_lives"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
+        android:layout_marginTop="18dp"
+        android:text="Settings"
+        android:textSize="30sp" />
+
+    <SeekBar
+        android:id="@+id/seekBar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewProgress"
+        android:layout_alignTop="@+id/textView1"
+        android:layout_marginTop="111dp"
+        android:max="12"
+        android:progress="5" />
 
     <TextView
         android:id="@+id/textViewProgress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/seekBar1"
-        android:layout_alignLeft="@+id/seekBar1"
+        android:layout_alignParentLeft="true"
         android:layout_marginBottom="36dp"
-        android:text="Length word: "
+        android:text="@string/progress_length"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
-        android:text="Settings" />
 
 </RelativeLayout>

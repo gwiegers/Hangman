@@ -29,6 +29,10 @@ import android.widget.TextView;
 import java.util.Random;
 import com.example.simplehangman.R;
 import android.util.TypedValue;
+import android.support.v4.app.DialogFragment;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+
 
 
 public class MainActivity extends Activity {
@@ -40,7 +44,6 @@ public class MainActivity extends Activity {
 		            "P", "Q", "R", "S", "T",
 		            "U", "V", "W", "X", "Y", "Z"};
 
-
     private String[] words;
     private Random rand;
     private String currWord;
@@ -51,17 +54,37 @@ public class MainActivity extends Activity {
     private LinearLayout textView;
     private TextView livesView;
     private EditText Inputbar;
-    int lives;
+    int progressLives;
+    int lives = 5;
+    int length = 5;
+    private AlertDialog alertDialog;
+    int lettersGuessed;
+    
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_main);
+        Intent intent = getIntent();       	
+        progressLives  = intent.getIntExtra("progressLives", 5);
+        if (progressLives == 0) {
+        	progressLives = 5;
+        }
+        length = intent.getIntExtra("progressLength", 6);
+        alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setMessage("Yeah, you lost");
+        alertDialog.setButton("Reset", new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int which) {
+        	settingUp(); 
+        }
+        });
+        alertDialog.setIcon(R.drawable.ic_launcher);
         settingUp();
     }
     
     public void settingUp() {     
          // Add letters to screen
+    	lettersGuessed = 0;
         textView = (LinearLayout)findViewById(R.id.textView);
         ABC = new TextView[27];
         ABCLet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -72,14 +95,14 @@ public class MainActivity extends Activity {
         	ABC[i].setTextSize(TypedValue.COMPLEX_UNIT_PX, 28);
   		    textView.addView(ABC[i]);
         }
-        lives = 3;
         // Add lives to the screen
         livesView = (TextView)findViewById(R.id.textLives);
+        lives = progressLives; 
         livesView.setText("Lives: "+lives);
         
         Resources res = getResources();
-        words = res.getStringArray(R.array.wordz);
-        rand = new Random();
+		words = res.getStringArray(R.array.wordz);
+		rand = new Random();
         currWord = "";
         wordLayout = (LinearLayout)findViewById(R.id.word);
         playGame();
@@ -94,22 +117,20 @@ public class MainActivity extends Activity {
     
     public boolean onOptionsItemSelected(MenuItem item) {
     	 
-    	switch (item.getItemId()) {
-	    	case R.id.reset:
-	    		settingUp();    	     	 
-	    	case R.id.title_activity_settings:
-	    		Intent intent = new Intent(this, Settings.class);
-                startActivity(intent);
-	    		
-	    	default:
-	    	return super.onOptionsItemSelected(item);
+    	if (item.getItemId() == R.id.reset) {
+    		settingUp();    
+    	}
+	    else if (item.getItemId() == R.id.title_activity_settings) {
+	    	Intent intent = new Intent(this, Settings.class);
+            startActivity(intent);
 	    }
+	    	return super.onOptionsItemSelected(item);
    }
     	     
     private void playGame() {
     	//play a new game
     	String newWord = words[rand.nextInt(words.length)];
-    	while(newWord.equals(currWord)) {
+    	while(newWord.length() != length) {
     		newWord = words[rand.nextInt(words.length)];
     	}
     	currWord = newWord;
@@ -149,7 +170,7 @@ public class MainActivity extends Activity {
              			//show letter	
              			charViews[j].setTextColor(Color.BLACK);
              			guessed = true;
-             			break;
+             			lettersGuessed = lettersGuessed + 1;
              		}	
              	}
              	// if letter is not guessed correctly, take a live
@@ -157,15 +178,19 @@ public class MainActivity extends Activity {
              		lives = lives - 1; 
                     livesView.setText("Lives: "+lives);
                     if (lives == 0) {
-                    	Intent intent = new Intent(this, YouLost.class);
-                        startActivity(intent);
+                        alertDialog.setMessage("Yeah, you lost :( The word was "+currWord);
+                        alertDialog.show();
                     }
             	}	
+             	else if (lettersGuessed == length) {
+                    alertDialog.setMessage("You Won! The word was "+currWord);
+                    alertDialog.show();
+             	}
+             		
             	//make letter white or disappear
              	ABC[i].setTextColor(Color.WHITE);
             	break;
             }
         }
     }  
-
 }
